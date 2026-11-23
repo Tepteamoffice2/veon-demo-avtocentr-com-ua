@@ -1,0 +1,133 @@
+---
+// Sticky white header (concept §8.3): logo → #top, 5 anchors, future pages, salon phone + call button.
+// Below 1200 px: round call button 48×48 and «Меню» opening a full-screen sheet (<dialog>), closes on choice and Esc.
+import FutureLink from "./FutureLink.astro";
+import Icon from "./Icon.astro";
+import { phones, address } from "../data/site";
+
+const nav = [
+  { href: "#models", label: "Автомобілі" },
+  { href: "#purchase", label: "Купівля" },
+  { href: "#service", label: "Сервіс" },
+  { href: "#about", label: "Про нас" },
+  { href: "#contacts", label: "Контакти" },
+];
+---
+<header class="header">
+  <div class="header__in container">
+    <a class="header__logo" href="#top">
+      <img src="/logo_uk.svg" width="649" height="165" alt="Автоцентр Укравто на Столичному — на початок сторінки" />
+    </a>
+    <nav class="header__nav" aria-label="Розділи сторінки">
+      <ul>
+        {nav.map((n) => <li><a href={n.href} data-nav>{n.label}</a></li>)}
+        <li><FutureLink note="Розділ у розробці">Акції</FutureLink></li>
+      </ul>
+    </nav>
+    <div class="header__actions" data-rec="U-R001">
+      <FutureLink note="Розділ у розробці" class="header__lang"><span lang="ru">RU</span></FutureLink>
+      <a class="header__phone tnum" href={phones.salon.href}>{phones.salon.label}</a>
+      <a class="btn btn--primary header__call" href={phones.salon.href}>Подзвонити</a>
+      <a class="header__round header__round--call" href={phones.salon.href} aria-label={`Подзвонити в салон ${phones.salon.label}`}>
+        <Icon name="phone" />
+      </a>
+      <button class="header__round header__menu-btn" type="button" aria-haspopup="dialog" aria-controls="menu" data-menu-open>
+        <Icon name="menu" /><span class="visually-hidden">Меню</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<dialog class="menu" id="menu" aria-label="Меню">
+  <div class="menu__top container">
+    <a class="header__logo" href="#top" data-menu-link>
+      <img src="/logo_uk.svg" width="649" height="165" alt="Автоцентр Укравто на Столичному — на початок сторінки" />
+    </a>
+    <button class="header__round" type="button" data-menu-close>
+      <Icon name="close" /><span class="visually-hidden">Закрити меню</span>
+    </button>
+  </div>
+  <nav class="menu__nav container" aria-label="Розділи сторінки">
+    <ul>
+      {nav.map((n) => <li><a href={n.href} data-menu-link>{n.label}</a></li>)}
+    </ul>
+    <p class="menu__future"><FutureLink note="Розділ у розробці">Акції</FutureLink></p>
+  </nav>
+  <div class="menu__contacts container">
+    <p><span class="small muted">Салон</span><a class="tnum" href={phones.salon.href}>{phones.salon.label}</a></p>
+    <p><span class="small muted">Сервіс</span><a class="tnum" href={phones.service.href}>{phones.service.label}</a></p>
+    <p class="small muted">{address.full}</p>
+  </div>
+</dialog>
+
+<style>
+  .header {
+    position: sticky; top: 0; z-index: 40;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .header__in { display: flex; align-items: center; gap: var(--s-3); height: var(--header-h); }
+  .header__logo { display: block; flex: none; }
+  .header__logo img { height: 2.25rem; width: auto; }
+  .header__nav { display: none; margin-right: auto; }
+  .header__nav ul { display: flex; align-items: center; gap: var(--s-3); }
+  .header__nav a, .header__nav :global(.future-link) {
+    position: relative; display: inline-flex; align-items: center; min-height: var(--tap);
+    font-size: 1rem; font-weight: 400; text-decoration: none;
+  }
+  .header__nav a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0.35rem; height: var(--line);
+    background: var(--color-accent); transform: scaleX(0); transform-origin: left;
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  .header__nav a:hover::after { transform: scaleX(.4); }
+  .header__nav a[aria-current="true"]::after { transform: scaleX(1); }
+  .header__actions { display: flex; align-items: center; gap: var(--s-2); margin-left: auto; }
+  .header__phone, .header__call, .header__actions :global(.header__lang) { display: none; }
+  .header__phone { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+  .header__phone:hover { text-decoration: underline; }
+  .header__call { min-height: 2.75rem; padding-inline: var(--s-2); }
+  .header__round {
+    display: inline-grid; place-items: center; width: 3rem; height: 3rem; flex: none;
+    border: 0; border-radius: 50%; background: var(--color-surface); color: var(--color-text); cursor: pointer;
+    transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+  }
+  .header__round:hover, .header__round:active { background: var(--color-border); }
+  /* Neutral call button: on phones the red call stays for the hero button and the bottom bar (one accent per screen). */
+
+  @media (min-width: 48rem) {
+    .header__phone { display: inline; }
+  }
+  @media (min-width: 64rem) {
+    .header__logo img { height: 2.5rem; }
+  }
+  @media (min-width: 75rem) {
+    .header__nav { display: block; }
+    .header__actions { margin-left: 0; }
+    .header__call, .header__actions :global(.header__lang) { display: inline-flex; }
+    .header__round { display: none; }
+    .header__in { gap: var(--s-4); }
+  }
+
+  /* Full-screen menu sheet */
+  .menu {
+    width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 0; border: 0;
+    background: var(--color-bg); color: var(--color-text);
+    flex-direction: column;
+  }
+  .menu[open] { display: flex; }
+  .menu::backdrop { background: var(--color-text); opacity: .4; }
+  .menu__top { display: flex; align-items: center; justify-content: space-between; min-height: var(--header-h); border-bottom: 1px solid var(--color-border); }
+  .menu__top .header__round { display: inline-grid; }
+  .menu__nav { padding-block: var(--s-3); }
+  .menu__nav a {
+    display: flex; align-items: center; min-height: 3.5rem;
+    font-family: var(--font-display); font-size: var(--fs-h2); font-weight: 700; line-height: 1.05; text-decoration: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .menu__nav a:hover, .menu__nav a:active { color: var(--color-accent); }
+  .menu__future { margin-top: var(--s-2); min-height: var(--tap); display: flex; align-items: center; }
+  .menu__contacts { margin-top: auto; padding-block: var(--s-3) calc(var(--s-4) + env(safe-area-inset-bottom)); display: grid; gap: var(--s-2); border-top: 2px solid var(--color-accent); }
+  .menu__contacts p { display: grid; }
+  .menu__contacts a { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; text-decoration: none; min-height: var(--tap); display: inline-flex; align-items: center; }
+</style>

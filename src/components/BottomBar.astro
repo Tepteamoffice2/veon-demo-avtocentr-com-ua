@@ -1,0 +1,34 @@
+---
+// Phone-width bottom bar (concept §8.3): call salon, call service, route. The page reserves its height (U-R010).
+import Icon from "./Icon.astro";
+import { phones, mapsUrl } from "../data/site";
+---
+<nav class="bar" aria-label="Швидкі дії" data-rec="U-R001,U-R010">
+  <a href={phones.salon.href}><Icon name="phone" /><span>Подзвонити</span></a>
+  <a href={phones.service.href}><Icon name="wrench" /><span>Сервіс</span></a>
+  <a href={mapsUrl} target="_blank" rel="noopener"><Icon name="route" /><span>Маршрут</span></a>
+</nav>
+
+<style>
+  .bar {
+    position: fixed; inset: auto 0 0 0; z-index: 35;
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    min-height: var(--bar-h); padding-bottom: env(safe-area-inset-bottom);
+    background: var(--color-bg); border-top: 1px solid var(--color-border);
+  }
+  .bar a {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    min-height: var(--bar-h); font-size: var(--fs-sm); font-weight: 600; text-decoration: none;
+    transition: background-color var(--dur-fast) var(--ease-out);
+  }
+  .bar a:first-child { background: var(--color-accent); color: var(--color-accent-ink); }
+  .bar a:first-child:active, .bar a:first-child:hover { background: var(--color-accent-hover); }
+  .bar a:not(:first-child):active, .bar a:not(:first-child):hover { background: var(--color-surface); }
+  .bar a:focus-visible { outline-offset: -4px; }
+  .bar a:first-child:focus-visible { outline-color: var(--color-on-dark); }
+  :global(body) { padding-bottom: calc(var(--bar-h) + env(safe-area-inset-bottom)); }
+  @media (min-width: 48rem) {
+    .bar { display: none; }
+    :global(body) { padding-bottom: 0; }
+  }
+</style>

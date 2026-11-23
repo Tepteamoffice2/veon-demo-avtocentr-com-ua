@@ -1,0 +1,45 @@
+---
+// Light compact footer (concept §8.2 footer): logo → #top, address, main phone, e-mail, socials, future sections.
+// The legal entity is not shown (B-F011 is unconfirmed).
+import FutureLink from "./FutureLink.astro";
+import { phones, email, address, socials } from "../data/site";
+const future = ["Акції", "Новини", "Вакансії", "Політика конфіденційності"];
+---
+<footer class="footer">
+  <div class="container footer__in">
+    <a class="footer__logo" href="#top">
+      <img src="/logo_uk.svg" width="649" height="165" alt="Автоцентр Укравто на Столичному — на початок сторінки" />
+    </a>
+    <address class="footer__addr">
+      <span>{address.full}</span>
+      <span>тел. <a class="tnum" href={phones.salon.href}>{phones.salon.label}</a></span>
+      <a href={email.href}>{email.label}</a>
+    </address>
+    <ul class="footer__row" aria-label="Соцмережі">
+      {socials.map((s) => <li><a href={s.url} target="_blank" rel="noopener">{s.name}<span class="visually-hidden"> (нова вкладка)</span></a></li>)}
+    </ul>
+    <ul class="footer__row footer__future" aria-label="Інші розділи">
+      {future.map((f) => <li><FutureLink note="Розділ у розробці">{f}</FutureLink></li>)}
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--color-surface); padding-block: var(--s-4); font-size: var(--fs-sm); }
+  .footer__in { display: grid; gap: var(--s-3); }
+  .footer__logo { display: block; width: fit-content; }
+  .footer__logo img { height: 2.25rem; width: auto; }
+  .footer__addr { font-style: normal; display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s-3); }
+  .footer__addr a, .footer__row a, .footer__row :global(.future-link) { display: inline-flex; align-items: center; min-height: var(--tap); font-weight: 600; }
+  .footer__row { display: flex; flex-wrap: wrap; gap: 0 var(--s-3); }
+  .footer__future { color: var(--color-muted); }
+  .footer__future :global(.future-link__note) { top: auto; bottom: calc(100% + var(--s-1)); }
+
+  @media (min-width: 64rem) {
+    .footer__in { grid-template-columns: auto minmax(0, 1fr); column-gap: var(--s-5); align-items: center; }
+    .footer__logo { grid-row: span 2; }
+    .footer__addr { grid-column: 2; }
+    .footer__row { grid-column: 2; }
+    .footer__future { grid-column: 1 / -1; border-top: 1px solid var(--color-border); padding-top: var(--s-2); }
+  }
+</style>

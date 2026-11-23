@@ -1,0 +1,78 @@
+---
+// #contacts (concept §8.2 #6): the end of the line — the address on the red line, route, two columns Салон / Сервіс.
+import Section from "./Section.astro";
+import FutureLink from "./FutureLink.astro";
+import Hours from "./Hours.astro";
+import Icon from "./Icon.astro";
+import { phones, email, address, mapsUrl } from "../data/site";
+---
+<Section id="contacts" rec="U-R007" class="contacts section">
+  <div class="container">
+    <div class="place">
+      <div class="place__line">
+        <h2 class="place__title"><span class="place__street">{address.street}</span> <span class="place__how"><span class="visually-hidden">— </span>як доїхати й зателефонувати</span></h2>
+        <a class="btn btn--primary place__route" href={mapsUrl} target="_blank" rel="noopener"><Icon name="route" />Прокласти маршрут<span class="visually-hidden"> (Google Maps, нова вкладка)</span></a>
+      </div>
+      <p class="place__city">{address.postal}, {address.locality}, {address.district}</p>
+    </div>
+
+    <div class="depts" data-rec="U-R002">
+      <div class="dept">
+        <h3>Салон</h3>
+        <Hours of="salon" caption="Години роботи салону" />
+        <ul class="dept__phones">
+          <li><a class="tnum" href={phones.salon.href}>{phones.salon.label}</a><span class="small muted">продаж і запчастини</span></li>
+          <li><a class="tnum" href={phones.salon2.href}>{phones.salon2.label}</a></li>
+        </ul>
+      </div>
+      <div class="dept">
+        <h3>Сервіс</h3>
+        <Hours of="service" caption="Години роботи сервісу" />
+        <ul class="dept__phones">
+          <li><a class="tnum" href={phones.service.href}>{phones.service.label}</a></li>
+          <li><a class="tnum" href={phones.service2.href}>{phones.service2.label}</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="contacts__more">
+      <p><span class="muted">Пошта</span> <a href={email.href}>{email.label}</a></p>
+      <p><span class="muted">Корпоративним клієнтам — відділ продажу</span> <a class="tnum" href={phones.salon.href}>{phones.salon.label}</a></p>
+      <FutureLink note="Розділ у розробці" class="contacts__corp">Сторінка для корпоративних клієнтів</FutureLink>
+    </div>
+  </div>
+</Section>
+
+<style>
+  :global(section.contacts) { padding-bottom: var(--s-6); }
+  /* The end of the line: the address stands on the red line, the route button stands next to it. */
+  .place { display: grid; gap: var(--s-2); }
+  .place__line {
+    display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--s-3) var(--s-4);
+    padding-bottom: var(--s-1); border-bottom: var(--line) solid var(--color-accent);
+  }
+  .place__title { display: flex; flex-direction: column-reverse; gap: var(--s-1); }
+  .place__street { font-size: var(--fs-xl); line-height: 1; letter-spacing: -0.01em; }
+  .place__how { font-size: var(--fs-lg); font-weight: 600; line-height: 1.2; color: var(--color-muted); }
+  .place__route { white-space: nowrap; margin-bottom: var(--s-1); }
+  .depts { display: grid; gap: var(--s-5); margin-top: var(--s-5); }
+  .dept { display: grid; gap: var(--s-2); align-content: start; }
+  .dept h3 { font-family: var(--font-display); font-size: var(--fs-h2); font-weight: 700; line-height: 1.05; }
+  .dept__phones { display: grid; gap: var(--s-1); }
+  .dept__phones li { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: var(--s-2); }
+  .dept__phones a {
+    font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; text-decoration: none;
+    min-height: var(--tap); display: inline-flex; align-items: center;
+  }
+  .dept__phones a:hover { color: var(--color-accent); text-decoration: underline; }
+  .contacts__more { display: grid; gap: var(--s-1); margin-top: var(--s-5); padding-top: var(--s-3); border-top: 1px solid var(--color-border); }
+  .contacts__more p { display: flex; flex-wrap: wrap; align-items: center; column-gap: var(--s-2); }
+  .contacts__more a { display: inline-flex; align-items: center; min-height: var(--tap); font-weight: 600; overflow-wrap: anywhere; }
+  .contacts__more :global(.contacts__corp) { justify-self: start; min-height: var(--tap); font-weight: 600; }
+
+  @media (min-width: 64rem) {
+    .depts { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+    .dept:first-child { grid-column: 1 / span 5; }
+    .dept:last-child { grid-column: 7 / span 5; }
+  }
+</style>

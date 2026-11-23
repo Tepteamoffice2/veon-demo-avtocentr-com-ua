@@ -1,0 +1,33 @@
+---
+// Opening hours table (C-001); today's row is highlighted by src/scripts/page.ts (Kyiv time).
+import { hours } from "../data/site";
+interface Props { of: "salon" | "service"; caption: string; dark?: boolean }
+const { of, caption, dark = false } = Astro.props;
+---
+<table class:list={["hours", dark && "hours--dark"]}>
+  <caption class="visually-hidden">{caption}</caption>
+  <tbody>
+    {hours[of].map((r) => (
+      <tr data-days={r.days.join(",")}>
+        <th scope="row">{r.label}</th>
+        <td class="tnum">{r.open}–{r.close}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+<style>
+  .hours { width: 100%; max-width: 24rem; border-collapse: collapse; font-size: var(--fs-body); }
+  th, td { padding: 0.6rem 0; text-align: left; border-bottom: 1px solid var(--color-border); vertical-align: baseline; }
+  th { font-weight: 400; padding-right: var(--s-3); }
+  td { font-weight: 600; white-space: nowrap; }
+  tr.is-today th, tr.is-today td { font-weight: 700; }
+  tr.is-today td { color: var(--color-accent); }
+  tr.is-today th { box-shadow: inset var(--line) 0 0 var(--color-accent); padding-left: var(--s-1); }
+  .hours :global(.today) { font-size: var(--fs-sm); font-weight: 400; color: var(--color-muted); }
+
+  .hours--dark th, .hours--dark td { border-bottom-color: var(--color-muted); }
+  .hours--dark tr.is-today td { color: var(--color-on-dark); }
+  .hours--dark tr.is-today th { box-shadow: inset var(--line) 0 0 var(--color-on-dark); }
+  .hours--dark :global(.today) { color: var(--color-on-dark-muted); }
+</style>

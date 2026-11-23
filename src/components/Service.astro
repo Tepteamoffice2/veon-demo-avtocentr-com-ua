@@ -1,0 +1,59 @@
+---
+// #service (concept §8.2 #4): graphite territory of owners. Wall of seven service brands (B-F002) left,
+// service hours, service phones and parts line right. No motion here (the hours table stays still).
+import Section from "./Section.astro";
+import FutureLink from "./FutureLink.astro";
+import Hours from "./Hours.astro";
+import Icon from "./Icon.astro";
+import { phones, serviceBrands } from "../data/site";
+---
+<Section id="service" rec="U-R005,U-R015" class="service section on-dark">
+  <div class="container service__grid">
+    <div class="service__main">
+      <h2>Сервіс семи марок — запис за телефоном</h2>
+      <p class="lead service__lead">Офіційний сервіс семи марок: технічне обслуговування, ремонт, гарантійне обслуговування й запчастини.</p>
+      <ul class="wall" aria-label="Марки сервісу">
+        {serviceBrands.map((b) => <li>{b}</li>)}
+      </ul>
+    </div>
+    <div class="service__side">
+      <h3 class="service__h3">Години сервісу</h3>
+      <Hours of="service" caption="Години роботи сервісу" dark />
+      <div class="service__phones" data-rec="U-R002">
+        <a class="btn btn--light" href={phones.service.href}><Icon name="phone" />Записатися телефоном</a>
+        <p class="small service__alt">
+          <a class="tnum" href={phones.service.href}>{phones.service.label}</a> або <a class="tnum" href={phones.service2.href}>{phones.service2.label}</a>
+        </p>
+        <p class="service__parts">Запчастини — <a class="tnum" href={phones.salon.href}>{phones.salon.label}</a></p>
+      </div>
+      <ul class="service__future">
+        <li><FutureLink note="Розділ у розробці">Онлайн-запис</FutureLink></li>
+        <li><FutureLink note="Розділ у розробці">Розрахунок вартості ТО</FutureLink></li>
+        <li><FutureLink note="Розділ у розробці">Гарантія</FutureLink></li>
+      </ul>
+    </div>
+  </div>
+</Section>
+
+<style>
+  :global(section.service) { background: var(--color-text); color: var(--color-on-dark); }
+  .service__grid { display: grid; gap: var(--s-5); }
+  .service__lead { margin-top: var(--s-2); color: var(--color-on-dark-muted); }
+  .wall { display: flex; flex-wrap: wrap; gap: 0 0.5em; margin-top: var(--s-4); }
+  .wall li {
+    font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 700; line-height: 1.02; letter-spacing: -0.01em;
+  }
+  .service__side { display: grid; gap: var(--s-3); align-content: start; }
+  .service__h3 { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; }
+  .service__phones { display: grid; gap: var(--s-2); justify-items: start; }
+  .service__alt, .service__parts { color: var(--color-on-dark-muted); }
+  .service__alt a, .service__parts a { color: var(--color-on-dark); font-weight: 600; display: inline-flex; align-items: center; min-height: var(--tap); }
+  .service__future { display: flex; flex-wrap: wrap; gap: 0 var(--s-3); padding-top: var(--s-2); border-top: 1px solid var(--color-muted); }
+  .service__future :global(.future-link) { min-height: var(--tap); color: var(--color-on-dark-muted); font-weight: 400; }
+
+  @media (min-width: 64rem) {
+    .service__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+    .service__main { grid-column: 1 / span 7; }
+    .service__side { grid-column: 9 / span 4; padding-top: var(--s-2); }
+  }
+</style>

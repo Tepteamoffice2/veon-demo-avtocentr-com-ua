@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Models from "../components/Models.astro";
+import Purchase from "../components/Purchase.astro";
+import Service from "../components/Service.astro";
+import About from "../components/About.astro";
+import Contacts from "../components/Contacts.astro";
+import Footer from "../components/Footer.astro";
+import BottomBar from "../components/BottomBar.astro";
+import { phones, email, address, socials, hours } from "../data/site";
+
+const title = "Нові авто шести марок і сервіс — Укравто на Столичному";
+const description = "Офіційний дилер шести марок на Столичному шосе, 90 у Києві: 46 моделей із цінами «від», тест-драйв, кредит, страхування, сервіс і гарантія.";
+
+const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const spec = (rows: typeof hours.salon) => rows.map((r) => ({
+  "@type": "OpeningHoursSpecification",
+  dayOfWeek: r.days.map((d) => `https://schema.org/${dayNames[d]}`),
+  opens: r.open,
+  closes: r.close,
+}));
+const tel = (href: string) => href.replace("tel:", "");
+const jsonld = {
+  "@context": "https://schema.org",
+  "@type": "AutoDealer",
+  name: "Автоцентр Укравто на Столичному",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: address.street,
+    addressLocality: "Київ",
+    postalCode: address.postal,
+    addressCountry: "UA",
+  },
+  telephone: tel(phones.salon.href),
+  email: email.label,
+  openingHoursSpecification: spec(hours.salon),
+  sameAs: socials.map((s) => s.url),
+  department: {
+    "@type": "AutoRepair",
+    name: "Сервіс Укравто на Столичному",
+    telephone: tel(phones.service.href),
+    openingHoursSpecification: spec(hours.service),
+  },
+};
+---
+<Base lang="uk" title={title} description={description}>
+  <script type="application/ld+json" slot="head" data-rec="SEO-R003" set:html={JSON.stringify(jsonld)} />
+  <Header slot="header" />
+  <Hero />
+  <Models />
+  <Purchase />
+  <Service />
+  <About />
+  <Contacts />
+  <Footer slot="footer" />
+  <BottomBar slot="footer" />
+  <script src="../scripts/page.ts"></script>
+</Base>

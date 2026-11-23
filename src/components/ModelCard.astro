@@ -1,0 +1,17 @@
+---
+// «Машина на лінії»: car on the red base line of its shelf, name (future model page), price «від», call to ask the price.
+import CarImage from "./CarImage.astro";
+import FutureLink from "./FutureLink.astro";
+import Icon from "./Icon.astro";
+import type { Model } from "../data/models";
+import { priceText } from "../data/models";
+import { phones } from "../data/site";
+interface Props { model: Model; index?: number }
+const { model, index = 0 } = Astro.props;
+---
+<li class="card" data-brand={model.brandSlug} style={`--k:${index}`}>
+  <div class="card__stage"><CarImage model={model} class="card__img" /></div>
+  <p class="card__name"><FutureLink note="Сторінка моделі в розробці">{model.name}</FutureLink></p>
+  <p class:list={["card__price tnum", !model.price && "card__price--ask"]} data-rec={model.price ? undefined : "U-R009"}>{priceText(model)}</p>
+  <a class="card__ask" href={phones.salon.href} aria-label={`Уточнити ціну ${model.name} за телефоном салону ${phones.salon.label}`}><Icon name="phone" />Уточнити ціну</a>
+</li>

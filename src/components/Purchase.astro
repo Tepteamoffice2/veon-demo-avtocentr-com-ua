@@ -1,0 +1,67 @@
+---
+// #purchase (concept §8.2 #3): four stops on one red line, what the salon does (B-F006), one call button.
+import Section from "./Section.astro";
+import FutureLink from "./FutureLink.astro";
+import Icon from "./Icon.astro";
+import { phones } from "../data/site";
+
+const stops = [
+  { title: "Тест-драйв", text: "Пробна поїздка на моделі, яку ви обрали, — час узгоджує менеджер.", more: "Про тест-драйв", call: "Записатися на тест-драйв" },
+  { title: "Кредит", text: "Оформлення кредиту на нове авто — у салоні, разом із покупкою.", more: "Про кредит" },
+  { title: "Страхування", text: "Поліс для нового авто оформлюють тут же, у салоні.", more: "Про страхування" },
+  { title: "Реєстрація", text: "Допомога з реєстрацією нового авто після купівлі.", more: "Про реєстрацію" },
+];
+---
+<Section id="purchase" rec="U-R006" class="purchase section">
+  <div class="container">
+    <h2>Тест-драйв, кредит, страхування й реєстрація — тут же, на Столичному шосе</h2>
+    <ol class="stops">
+      {stops.map((s, i) => (
+        <li class="stop">
+          <span class="stop__n tnum" aria-hidden="true">{i + 1}</span>
+          <h3 class="stop__title">{s.title}</h3>
+          <p class="stop__text">{s.text}</p>
+          {s.call && <a class="stop__call" href={phones.salon.href}><Icon name="phone" />{s.call}</a>}
+          <FutureLink note="Розділ у розробці" class="stop__more">{s.more}</FutureLink>
+        </li>
+      ))}
+    </ol>
+    <div class="purchase__cta">
+      <a class="btn btn--primary" href={phones.salon.href}><Icon name="phone" />Запитати менеджера</a>
+      <a class="purchase__phone tnum" href={phones.salon.href}>{phones.salon.label}</a>
+    </div>
+  </div>
+</Section>
+
+<style>
+  :global(section.purchase) { background: var(--color-surface); }
+  h2 { max-width: 22ch; }
+  .stops { position: relative; display: grid; gap: var(--s-4); margin-top: var(--s-5); padding-left: var(--s-4); }
+  .stops::before { content: ""; position: absolute; left: 0.6875rem; top: 0.75rem; bottom: 0.75rem; width: var(--line); background: var(--color-accent); }
+  .stop { position: relative; display: grid; gap: var(--s-1); align-content: start; }
+  .stop__n {
+    position: absolute; left: calc(-1 * var(--s-4)); top: 0;
+    display: grid; place-items: center; width: 1.5rem; height: 1.5rem;
+    background: var(--color-accent); color: var(--color-accent-ink); border-radius: var(--radius);
+    font-size: var(--fs-sm); font-weight: 700; line-height: 1;
+  }
+  .stop__title { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; line-height: 1.1; }
+  .stop__text { max-width: 30ch; }
+  .stop__call {
+    justify-self: start; display: inline-flex; align-items: center; gap: 0.4rem; min-height: var(--tap);
+    font-weight: 600; text-decoration: underline; text-decoration-color: var(--color-muted); text-underline-offset: .22em;
+  }
+  .stop__call :global(svg) { width: 1.125rem; height: 1.125rem; flex: none; }
+  .stop__call:hover, .stop__call:active { color: var(--color-muted); text-decoration-color: currentColor; }
+  .stop :global(.stop__more) { justify-self: start; min-height: var(--tap); font-size: var(--fs-sm); font-weight: 600; color: var(--color-muted); }
+  .purchase__cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-3); margin-top: var(--s-5); }
+  .purchase__phone { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; text-decoration: none; min-height: var(--tap); display: inline-flex; align-items: center; }
+  .purchase__phone:hover { text-decoration: underline; }
+
+  @media (min-width: 64rem) {
+    .stops { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gutter); padding-left: 0; padding-top: var(--s-4); }
+    .stops::before { left: 0; right: 0; top: 0.6875rem; bottom: auto; width: auto; height: var(--line); }
+    .stop__n { position: absolute; left: 0; top: calc(-1 * var(--s-4)); }
+    .stop { padding-right: var(--s-3); }
+  }
+</style>

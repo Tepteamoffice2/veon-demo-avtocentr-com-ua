@@ -1,0 +1,312 @@
+---
+// #models (concept §8.2 #2): sticky brand tabs with counts, price shelves «до 900 000 / … / від 1 500 000 грн».
+// Each shelf is a cut of the hero line: the cars stand on one red base line across the row.
+// A chosen brand shows its models as one row/grid on the line (no half-empty budget shelves).
+// All 46 cards are in the HTML; without JS every shelf is fully open and the tabs are not shown.
+import Section from "./Section.astro";
+import ModelCard from "./ModelCard.astro";
+import FutureLink from "./FutureLink.astro";
+import { shelves, brands, models } from "../data/models";
+import { modelsWord } from "../data/site";
+
+const FIRST_ROW = 4;
+---
+<Section id="models" rec="U-R004" class="models section">
+  <div class="container">
+    <h2 id="models-title">{models.length} моделей шести марок — за ціною</h2>
+  </div>
+
+  <div class="tabs-wrap">
+    <div class="container">
+      <div class="tabs" role="group" aria-label="Оберіть марку" data-tabs data-rec="U-R015">
+        <button type="button" class="tab" data-filter="all" aria-pressed="true">Усі <span class="tab__n">{models.length}</span></button>
+        {brands.map((b) => (
+          <button type="button" class="tab" data-filter={b.slug} data-name={b.brand} aria-pressed="false">{b.brand} <span class="tab__n">{b.count}</span></button>
+        ))}
+        <span class="tabs__ind" aria-hidden="true"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="catalog" data-catalog data-filter="all">
+      <p class="visually-hidden" aria-live="polite" data-filter-status></p>
+      <div class="brand-head" data-brand-head hidden>
+        <h3 class="shelf__title" data-brand-title></h3>
+        <p class="small muted" data-brand-count></p>
+      </div>
+      <div class="shelves" data-shelves>
+        {shelves.map((s) => (
+          <div class:list={["shelf", s.items.length > FIRST_ROW + 1 && "is-collapsible"]} data-shelf data-reveal aria-labelledby={`${s.id}-title`} role="group">
+            <div class="shelf__label">
+              <h3 id={`${s.id}-title`} class="shelf__title tnum">{s.title}</h3>
+              <p class="small muted">{modelsWord(s.items.length)}</p>
+            </div>
+            <ul class="shelf__list" id={`${s.id}-list`}>
+              {s.items.map((m, i) => <ModelCard model={m} index={i % FIRST_ROW} />)}
+            </ul>
+            {s.items.length > FIRST_ROW + 1 && (
+              <button type="button" class="shelf__more" aria-expanded="false" aria-controls={`${s.id}-list`}
+                      data-more={`Ще ${s.items.length - FIRST_ROW} у цьому бюджеті`} data-less="Згорнути">
+                Ще {s.items.length - FIRST_ROW} у цьому бюджеті
+              </button>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="models__foot">
+      <p class="small muted">Ціни «від» станом на 23.11.2026. Точну ціну й наявність уточнюйте за телефоном.</p>
+      <FutureLink note="Розділ у розробці" class="models__all">Увесь каталог</FutureLink>
+    </div>
+  </div>
+</Section>
+
+<style>
+  :global(section.models) { padding-bottom: var(--s-5); }
+  h2 { max-width: 18ch; }
+
+  /* Sticky brand tabs (JS only: without scripting all models are already listed) */
+  .tabs-wrap { display: none; }
+  :global(.js) .tabs-wrap {
+    display: block; position: sticky; top: var(--header-h); z-index: 30;
+    margin-top: var(--s-3); background: var(--color-bg); border-bottom: 1px solid var(--color-border);
+  }
+  .tabs {
+    position: relative; display: flex; gap: var(--s-1);
+    overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain;
+    margin-inline: calc(-1 * var(--space)); padding-inline: var(--space);
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex: none; display: inline-flex; align-items: baseline; gap: 0.35em;
+    min-height: var(--tabs-h); padding: 0 var(--s-2); border: 0; background: none; cursor: pointer;
+    font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 600; line-height: var(--tabs-h);
+    transition: color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out);
+  }
+  .tab:first-child { padding-left: 0; }
+  .tab__n { font-family: var(--font-body); font-size: var(--fs-sm); font-weight: 400; color: var(--color-muted); font-variant-numeric: tabular-nums; }
+  .tab:hover { color: var(--color-accent); }
+  .tab[aria-pressed="true"] { color: var(--color-accent); }
+  .tab:focus-visible { outline-offset: -2px; }
+  .tabs__ind {
+    position: absolute; left: 0; bottom: 0; width: 1px; height: var(--line);
+    background: var(--color-accent); transform-origin: left;
+    transform: translateX(var(--ind-x, 0px)) scaleX(var(--ind-w, 0));
+    transition: transform 250ms var(--ease-out);
+  }
+
+  /* Shelves */
+  .catalog { margin-top: var(--s-4); }
+  .shelves { display: grid; gap: var(--s-5); }
+  .shelf { display: grid; gap: var(--s-3); }
+  .shelf[hidden] { display: none; }
+  .shelf__label, .brand-head { position: relative; }
+  .shelf__title { font-family: var(--font-display); font-size: var(--fs-h2); font-weight: 700; line-height: 1.05; }
+  .shelf__list {
+    display: grid; grid-auto-flow: column; grid-auto-columns: 70%; gap: 0;
+    overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: thin;
+    margin-inline: calc(-1 * var(--space)); padding-inline: var(--space); scroll-padding-inline: var(--space);
+    padding-bottom: var(--s-1);
+  }
+  .shelf__more {
+    display: none; justify-self: start; align-items: center; min-height: var(--tap); padding: 0;
+    border: 0; background: none; cursor: pointer; font-weight: 600; text-decoration: underline; text-underline-offset: .2em;
+    white-space: nowrap;
+  }
+  .shelf__more:hover { color: var(--color-accent); }
+  .brand-head[hidden] { display: none; }
+  .brand-head { margin-bottom: var(--s-3); }
+
+  /* Card: no gaps between cards, so the stage lines join into one red base line */
+  .catalog :global(.card) {
+    scroll-snap-align: start; min-width: 0;
+    display: grid; grid-template-rows: auto auto auto 1fr; gap: var(--s-1); align-content: start;
+  }
+  .catalog :global(.card > :not(.card__stage)) { margin-right: var(--s-3); }
+  .catalog :global(.card[hidden]) { display: none; }
+  .catalog :global(.card__stage) {
+    position: relative; display: flex; align-items: flex-end; height: 7rem;
+    padding: 0 var(--s-3) var(--line) 0;
+  }
+  .catalog :global(.card__stage::after), .shelf__label::after, .brand-head::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: var(--line);
+    background: var(--color-accent); transform-origin: left;
+  }
+  .shelf__label::after, .brand-head::after { display: none; }
+  .catalog :global(.card__img) {
+    width: auto; height: auto; max-width: 100%; max-height: 100%;
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  .catalog :global(.card__name) { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 600; line-height: 1.15; margin-top: var(--s-1); }
+  .catalog :global(.card__price) { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; line-height: 1.1; }
+  .catalog :global(.card__price--ask) { color: var(--color-muted); }
+  /* «Уточнити ціну»: secondary graphite text link with a phone icon; the red stays for the line and the main button. */
+  .catalog :global(.card__ask) {
+    align-self: end; justify-self: start; display: inline-flex; align-items: center; gap: 0.4rem;
+    min-height: var(--tap); color: var(--color-text); font-size: var(--fs-sm); font-weight: 600;
+    text-decoration: underline; text-decoration-color: var(--color-muted); text-underline-offset: .22em;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .catalog :global(.card__ask svg) { width: 1rem; height: 1rem; flex: none; }
+  .catalog :global(.card__ask:hover), .catalog :global(.card__ask:active) { color: var(--color-muted); text-decoration-color: currentColor; }
+  @media (hover: hover) {
+    .catalog :global(.card:hover .card__img) { transform: translateX(-6px); }
+    .catalog :global(.card:hover .card__price) { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .18em; }
+  }
+  .catalog :global(.card:focus-within .card__img) { transform: translateX(-6px); }
+  .catalog :global(.card:focus-within .card__price) { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .18em; }
+
+  .models__foot { display: grid; gap: var(--s-1); justify-items: start; margin-top: var(--s-5); padding-top: var(--s-3); border-top: 1px solid var(--color-border); }
+  .models__foot :global(.models__all) { min-height: var(--tap); font-weight: 600; }
+
+  /* A brand is chosen: its models in one row (phone) or one grid (wider) on the line, sorted by price. */
+  .catalog:not([data-filter="all"]) .shelf,
+  .catalog:not([data-filter="all"]) .shelf__list { display: contents; }
+  .catalog:not([data-filter="all"]) .shelf__label,
+  .catalog:not([data-filter="all"]) .shelf__more { display: none; }
+  .catalog:not([data-filter="all"]) .shelves {
+    gap: 0; grid-auto-flow: column; grid-auto-columns: 70%;
+    overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+    margin-inline: calc(-1 * var(--space)); padding-inline: var(--space); scroll-padding-inline: var(--space); padding-bottom: var(--s-1);
+  }
+
+  @media (min-width: 48rem) {
+    .shelf__list, .catalog:not([data-filter="all"]) .shelves {
+      grid-auto-flow: row; grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: var(--s-4); column-gap: 0;
+      overflow: visible; margin: 0; padding: 0; scroll-snap-type: none;
+    }
+    .catalog:not([data-filter="all"]) .shelves { grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); }
+    :global(.js) .shelf__more { display: inline-flex; }
+    :global(.js) .catalog[data-filter="all"] .shelf.is-collapsible:not(.is-open) :global(.card:nth-child(n + 5)) { display: none; }
+  }
+  @media (min-width: 75rem) {
+    /* The budget (or brand) label stands at the left end of the same line, as «46 моделей» does in the hero. */
+    .shelf { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 0; row-gap: var(--s-2); align-items: start; }
+    .shelf__label, .brand-head {
+      grid-column: 1 / span 3; height: 7rem; padding: 0 var(--gutter) var(--s-2) 0; margin: 0;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .brand-head[hidden] { display: none; }
+    .shelf__label::after, .brand-head::after { display: block; }
+    .shelf__label p, .brand-head p { position: absolute; top: calc(100% + var(--s-1)); left: 0; }
+    .shelf__list { grid-column: 4 / span 9; }
+    .shelf__more { grid-column: 4 / span 9; }
+    .shelves { gap: var(--s-6); }
+    .catalog:not([data-filter="all"]) { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: start; }
+    .catalog:not([data-filter="all"]) .shelves { grid-column: 4 / span 9; }
+  }
+
+  /* Motion 2: the line draws from the left under the cars, then the cars stand on it (once, on entering the screen). */
+  .catalog :global(.card__stage::after), .shelf__label::after { transition: transform 400ms var(--ease-out); }
+  :global(.js) .shelf:not(.is-visible) .shelf__label::after,
+  :global(.js) .shelf:not(.is-visible) :global(.card__stage::after) { transform: scaleX(0); }
+  :global(.js) .shelf:not(.is-visible) :global(.card__img) { opacity: 0; }
+  .shelf.is-visible :global(.card__img) { transition: opacity 300ms var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+  @media (min-width: 48rem) {
+    .catalog :global(.card__stage::after) { transition-duration: 300ms; transition-delay: calc(var(--k, 0) * 120ms + 300ms); transition-timing-function: linear; }
+    .shelf__label::after { transition-duration: 300ms; transition-timing-function: linear; }
+    .shelf.is-visible :global(.card__img) { transition-delay: 800ms, 0ms; }
+  }
+  /* Motion 3: cards of the chosen brand slide in */
+  @keyframes card-in { from { opacity: 0; transform: translateX(8px); } }
+  .catalog :global(.card.is-entering) { animation: card-in 200ms var(--ease-out) backwards; }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js) .shelf:not(.is-visible) .shelf__label::after,
+    :global(.js) .shelf:not(.is-visible) :global(.card__stage::after) { transform: none; }
+    :global(.js) .shelf:not(.is-visible) :global(.card__img) { opacity: 1; }
+    .tabs__ind { transition: none; }
+    .catalog :global(.card.is-entering) { animation: none; }
+    .catalog :global(.card:hover .card__img), .catalog :global(.card:focus-within .card__img) { transform: none; }
+  }
+</style>
+
+<script>
+  import { modelsWord } from "../data/site";
+
+  const root = document.querySelector<HTMLElement>("[data-catalog]");
+  const head = document.querySelector<HTMLElement>("[data-brand-head]");
+  const tabs = document.querySelector<HTMLElement>("[data-tabs]");
+  const status = document.querySelector<HTMLElement>("[data-filter-status]");
+  const ind = tabs?.querySelector<HTMLElement>(".tabs__ind");
+
+  const moveIndicator = () => {
+    const on = tabs?.querySelector<HTMLElement>('[aria-pressed="true"]');
+    if (!on || !ind || !tabs) return;
+    ind.style.setProperty("--ind-x", `${on.offsetLeft}px`);
+    ind.style.setProperty("--ind-w", `${on.offsetWidth}`);
+  };
+
+  const setFilter = (slug: string, animate = true) => {
+    if (!root || !tabs) return;
+    root.dataset.filter = slug;
+    let name = "";
+    tabs.querySelectorAll<HTMLButtonElement>("[data-filter]").forEach((b) => {
+      const on = b.dataset.filter === slug;
+      b.setAttribute("aria-pressed", String(on));
+      if (on) { name = b.dataset.name ?? ""; b.scrollIntoView({ block: "nearest", inline: "nearest" }); }
+    });
+    let total = 0;
+    root.querySelectorAll<HTMLElement>("[data-shelf]").forEach((shelf) => {
+      shelf.querySelectorAll<HTMLElement>(".card").forEach((card) => {
+        const show = slug === "all" || card.dataset.brand === slug;
+        card.hidden = !show;
+        card.classList.remove("is-entering");
+        if (show) {
+          card.style.setProperty("--k", String(total % 4));
+          total += 1;
+          if (animate) { void card.offsetWidth; card.classList.add("is-entering"); }
+        }
+      });
+      if (slug !== "all") shelf.classList.add("is-visible");
+    });
+    if (slug === "all") {
+      root.querySelectorAll<HTMLElement>("[data-shelf]").forEach((shelf) =>
+        shelf.querySelectorAll<HTMLElement>(".card").forEach((c, i) => c.style.setProperty("--k", String(i % 4))));
+    }
+    if (head) {
+      head.hidden = slug === "all";
+      const t = head.querySelector("[data-brand-title]");
+      const c = head.querySelector("[data-brand-count]");
+      if (t) t.textContent = name;
+      if (c) c.textContent = `${modelsWord(total)}, за ціною`;
+    }
+    // Columns for a brand grid: 3 or 4, whichever leaves fewer empty places in the last row.
+    const empty = (c: number) => (c - (total % c)) % c;
+    root.style.setProperty("--cols", String(empty(3) < empty(4) ? 3 : 4));
+    if (status) status.textContent = `Показано ${modelsWord(total)}`;
+    moveIndicator();
+  };
+
+  tabs?.addEventListener("click", (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>("[data-filter]");
+    if (b?.dataset.filter) setFilter(b.dataset.filter);
+  });
+
+  // Hero cars: choose the brand, then the anchor scrolls to #models.
+  document.querySelectorAll<HTMLAnchorElement>("a[data-brand]").forEach((a) => {
+    a.addEventListener("click", () => { if (a.dataset.brand) setFilter(a.dataset.brand, false); });
+  });
+
+  // «Ще N у цьому бюджеті»: a real expand of the shelf (wider screens, all brands).
+  root?.querySelectorAll<HTMLButtonElement>(".shelf__more").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const shelf = btn.closest<HTMLElement>("[data-shelf]");
+      if (!shelf) return;
+      const open = !shelf.classList.contains("is-open");
+      shelf.classList.toggle("is-open", open);
+      btn.setAttribute("aria-expanded", String(open));
+      btn.textContent = (open ? btn.dataset.less : btn.dataset.more) ?? "";
+      if (open) {
+        shelf.querySelectorAll<HTMLElement>(".card:nth-child(n + 5)").forEach((c) => {
+          c.classList.remove("is-entering"); void c.offsetWidth; c.classList.add("is-entering");
+        });
+      }
+    });
+  });
+
+  moveIndicator();
+  window.addEventListener("resize", moveIndicator);
+  document.fonts?.ready.then(moveIndicator);
+</script>

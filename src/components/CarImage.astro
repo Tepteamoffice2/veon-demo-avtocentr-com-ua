@@ -1,0 +1,18 @@
+---
+// A client PNG (trimmed, WebP 1x/2x). Sized by its box: never wider than its file, bottom = wheels.
+import type { Model } from "../data/models";
+interface Props { model: Model; eager?: boolean; priority?: boolean; class?: string }
+const { model, eager = false, priority = false, class: cls } = Astro.props;
+const { x1, x2 } = model.img;
+---
+<img data-rec="SEO-R005,G-R003"
+  class={cls}
+  src={x1.file}
+  srcset={x2.w > x1.w ? `${x1.file} 1x, ${x2.file} 2x` : undefined}
+  width={x1.w}
+  height={x1.h}
+  alt={`${model.name}, вид збоку`}
+  loading={eager ? "eager" : "lazy"}
+  decoding="async"
+  fetchpriority={priority ? "high" : undefined}
+/>

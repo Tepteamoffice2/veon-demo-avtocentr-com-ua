@@ -1,0 +1,43 @@
+---
+// #about (concept §8.2 #5): one large fact «понад 20 років» (site wording, B-F010), facts B-F001/B-F002, socials (confirmed).
+import Section from "./Section.astro";
+import FutureLink from "./FutureLink.astro";
+import { socials } from "../data/site";
+---
+<Section id="about" class="about section">
+  <div class="container about__grid">
+    <div class="about__fact">
+      <h2><span class="about__name">Укравто на Столичному:</span> <span class="about__big">понад 20 років</span></h2>
+      <p class="about__sub muted">на ринку продажу й обслуговування авто в Україні</p>
+    </div>
+    <div class="about__text">
+      <p>Автоцентр Укравто на Столичному — підрозділ корпорації УКРАВТО ГРУП.</p>
+      <p>Офіційний дилер і сервіс Kia, Opel, Peugeot, Chery, Jetour і KGM (SsangYong), а також офіційний сервіс Citroen — на одному майданчику на Столичному шосе, 90.</p>
+      <FutureLink note="Розділ у розробці" class="about__more">Детальніше про автоцентр</FutureLink>
+      <ul class="socials" aria-label="Автоцентр у соцмережах" data-rec="S-R009">
+        {socials.map((s) => (
+          <li><a href={s.url} target="_blank" rel="noopener">{s.name}<span class="visually-hidden"> (відкриється в новій вкладці)</span></a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .about__grid { display: grid; gap: var(--s-4); }
+  .about__name { display: block; font-size: var(--fs-h2); }
+  .about__big { display: block; margin-top: var(--s-1); font-size: var(--fs-xl); line-height: 1; letter-spacing: -0.01em; }
+  .about__sub { margin-top: var(--s-1); max-width: 28ch; }
+  .about__text { display: grid; gap: var(--s-2); align-content: start; max-width: 38rem; }
+  .about__text :global(.about__more) { justify-self: start; min-height: var(--tap); font-weight: 600; }
+  /* Socials at text size: they are confirmation, not the subject of the block */
+  .socials { display: flex; flex-wrap: wrap; gap: 0 var(--s-3); padding-top: var(--s-1); border-top: 1px solid var(--color-border); }
+  .socials a { display: inline-flex; align-items: center; min-height: var(--tap); font-weight: 600; }
+  .socials a:hover { color: var(--color-accent); }
+
+  @media (min-width: 64rem) {
+    .about__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+    .about__fact { grid-column: 1 / span 5; }
+    .about__text { grid-column: 7 / span 6; padding-top: var(--s-1); }
+  }
+</style>

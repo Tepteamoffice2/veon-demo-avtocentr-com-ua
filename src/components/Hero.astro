@@ -1,0 +1,116 @@
+---
+// First screen (concept §8.2 #1, §8.7): H1 + one sentence (address, today's hours) + call; the red line with six cars,
+// each a filter for its brand in #models. Without JS the cars are plain anchors to #models.
+import CarImage from "./CarImage.astro";
+import Icon from "./Icon.astro";
+import { heroCars, brands, priceText, formatPrice, priceRange, models } from "../data/models";
+import { phones, address, modelsWord } from "../data/site";
+
+const countOf = (brand: string) => brands.find((b) => b.brand === brand)?.count ?? 0;
+const modelOnly = (name: string, brand: string) => name.replace(`${brand} `, "");
+---
+<section id="hero" class="hero" data-rec="U-R003" aria-labelledby="hero-title">
+  <div class="hero__top container">
+    <h1 id="hero-title" data-rec="SEO-R001,G-R002">Шість марок нових авто й офіційний сервіс на Столичному шосе, 90</h1>
+    <div class="hero__aside">
+      <p class="hero__where" data-today="hero">
+        {address.street}, Київ — салон пн–пт 09:00–19:00, сервіс пн–пт 08:00–20:00.
+      </p>
+      <a class="btn btn--primary hero__call" href={phones.salon.href} data-rec="U-R001,SEO-R004,M-R001,G-R001"><Icon name="phone" />Подзвонити в салон</a>
+      <p class="hero__links">
+        <a href="#models">Обрати авто</a>
+        <a href="#service">Сервіс і гарантія</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="hero__line container">
+    <p class="hero__range">
+      <span>{models.length} моделей</span>
+      <span>від {formatPrice(priceRange.min)} до {formatPrice(priceRange.max)}&nbsp;грн</span>
+    </p>
+    <ul class="hero__cars" data-rec="U-R015,P-R001,P-R002,P-R005" aria-label="Марки продажу — оберіть, щоб побачити моделі">
+      {heroCars.map((m, i) => (
+        <li style={`--i:${i}`}>
+          <a class="hcar" href="#models" data-brand={m.brandSlug}
+             aria-label={`${m.brand}: показати ${modelsWord(countOf(m.brand))} марки. На фото ${m.name}, ${priceText(m)}`}>
+            <span class="hcar__stage"><CarImage model={m} eager priority={i === 0} class="hcar__img" /></span>
+            <span class="hcar__brand">{m.brand}</span>
+            <span class="hcar__meta small"><span>{modelOnly(m.name, m.brand)}</span> <span class="hcar__price tnum">{priceText(m)}</span></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .hero { display: flex; flex-direction: column; gap: var(--s-4); padding-top: var(--s-3); padding-bottom: var(--s-4); }
+  .hero__top { display: grid; gap: var(--s-3); }
+  h1 { font-size: var(--fs-h1); line-height: 0.95; letter-spacing: -0.01em; text-wrap: balance; }
+  .hero__aside { display: grid; gap: var(--s-2); align-content: start; }
+  .hero__where { max-width: 30rem; }
+  .hero__call { width: 100%; }
+  .hero__links { display: flex; flex-wrap: wrap; column-gap: var(--s-4); }
+  .hero__links a { display: inline-flex; align-items: center; min-height: var(--tap); font-weight: 600; }
+  .hero__links a:hover { color: var(--color-accent); }
+
+  /* The line */
+  .hero__line { display: grid; gap: var(--s-2); }
+  .hero__range { display: flex; flex-wrap: wrap; column-gap: 0.4em; font-family: var(--font-display); font-size: var(--fs-md); font-weight: 600; line-height: 1.2; }
+  .hero__cars {
+    display: grid; grid-auto-flow: column; grid-auto-columns: 11rem;
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: var(--space);
+    margin-inline: calc(-1 * var(--space)); padding-inline: var(--space);
+    scrollbar-width: none;
+  }
+  .hero__cars::-webkit-scrollbar { display: none; }
+  .hero__cars li { scroll-snap-align: start; min-width: 0; }
+  .hcar { display: grid; gap: var(--s-1); text-decoration: none; padding-bottom: var(--s-1); }
+  .hcar__stage {
+    display: flex; align-items: flex-end; height: 5.5rem; padding-right: var(--s-2);
+    border-bottom: var(--line) solid var(--color-accent);
+  }
+  .hcar__img { width: auto; height: auto; max-width: 100%; max-height: 100%; transition: transform var(--dur-fast) var(--ease-out); }
+  /* Motion 4: the car «moves off» to the left (the cars face left) on hover and keyboard focus. */
+  @media (hover: hover) { .hcar:hover .hcar__img { transform: translateX(-6px); } }
+  .hcar:focus-visible .hcar__img { transform: translateX(-6px); }
+  .hcar__brand { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; line-height: 1; margin-top: var(--s-1); }
+  .hcar__meta { display: grid; color: var(--color-muted); padding-right: var(--s-2); }
+  .hcar__price { color: var(--color-text); font-family: var(--font-display); font-size: var(--fs-md); font-weight: 700; line-height: 1.2; white-space: nowrap; }
+  .hcar:hover .hcar__brand, .hcar:focus-visible .hcar__brand { color: var(--color-accent); }
+  .hcar:hover .hcar__price, .hcar:focus-visible .hcar__price { text-decoration: underline; text-underline-offset: .2em; }
+  .hcar:focus-visible { outline-offset: 4px; }
+
+  /* Motion 1: the cars drive up to the line after first paint; H1 and buttons never move. */
+  @keyframes drive-in { from { opacity: 0; transform: translateX(24px); } }
+  @keyframes fade-in { from { opacity: 0; } }
+  :global(.js) .hcar__img { animation: fade-in 300ms var(--ease-out) backwards; animation-delay: 120ms; }
+
+  @media (min-width: 48rem) {
+    :global(.js) .hcar__img { animation: drive-in var(--dur) var(--ease-out) backwards; animation-delay: calc(150ms + var(--i) * 60ms); }
+    .hero__call { width: fit-content; }
+  }
+  @media (min-width: 64rem) {
+    .hero { gap: var(--s-5); padding-top: var(--s-5); padding-bottom: var(--s-4); }
+    .hero__top { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: end; }
+    h1 { grid-column: 1 / span 8; }
+    .hero__aside { grid-column: 9 / span 4; }
+  }
+  @media (min-width: 75rem) {
+    .hero__line { grid-template-columns: 11.5rem minmax(0, 1fr); column-gap: 0; align-items: start; }
+    .hero__range {
+      flex-direction: column; justify-content: flex-end; flex-wrap: nowrap; height: 6.25rem;
+      padding: 0 var(--s-2) var(--s-1) 0; border-bottom: var(--line) solid var(--color-accent);
+    }
+    .hero__cars {
+      grid-auto-flow: row; grid-template-columns: repeat(6, minmax(0, 1fr));
+      overflow: visible; margin: 0; padding: 0; scroll-snap-type: none;
+    }
+    .hcar__stage { height: 6.25rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js) .hcar__img { animation: none; }
+    .hcar:hover .hcar__img, .hcar:focus-visible .hcar__img { transform: none; }
+  }
+</style>

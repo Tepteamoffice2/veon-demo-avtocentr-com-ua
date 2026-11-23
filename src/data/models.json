@@ -1,0 +1,1014 @@
+[
+ {
+  "brand": "Kia",
+  "brandSlug": "kia",
+  "name": "Kia Sportage",
+  "price": 1275000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_83-232.webp",
+    "w": 232,
+    "h": 89
+   },
+   "x2": {
+    "file": "/models/0001_83-464.webp",
+    "w": 464,
+    "h": 179
+   }
+  },
+  "natural": {
+   "w": 599,
+   "h": 231
+  }
+ },
+ {
+  "brand": "Kia",
+  "brandSlug": "kia",
+  "name": "Kia XCeed",
+  "price": 979000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_37-232.webp",
+    "w": 232,
+    "h": 81
+   },
+   "x2": {
+    "file": "/models/0001_37-464.webp",
+    "w": 464,
+    "h": 162
+   }
+  },
+  "natural": {
+   "w": 612,
+   "h": 214
+  }
+ },
+ {
+  "brand": "Kia",
+  "brandSlug": "kia",
+  "name": "Kia Picanto",
+  "price": 1035596,
+  "img": {
+   "x1": {
+    "file": "/models/0000_01-232.webp",
+    "w": 232,
+    "h": 103
+   },
+   "x2": {
+    "file": "/models/0000_01-278.webp",
+    "w": 278,
+    "h": 124
+   }
+  },
+  "natural": {
+   "w": 278,
+   "h": 124
+  }
+ },
+ {
+  "brand": "Kia",
+  "brandSlug": "kia",
+  "name": "Kia Sorento",
+  "price": 2600000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_69-232.webp",
+    "w": 232,
+    "h": 89
+   },
+   "x2": {
+    "file": "/models/0001_69-282.webp",
+    "w": 282,
+    "h": 108
+   }
+  },
+  "natural": {
+   "w": 282,
+   "h": 108
+  }
+ },
+ {
+  "brand": "Kia",
+  "brandSlug": "kia",
+  "name": "Kia Tasman",
+  "price": 1860000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_96-232.webp",
+    "w": 232,
+    "h": 86
+   },
+   "x2": {
+    "file": "/models/0001_96-464.webp",
+    "w": 464,
+    "h": 173
+   }
+  },
+  "natural": {
+   "w": 602,
+   "h": 224
+  }
+ },
+ {
+  "brand": "Opel",
+  "brandSlug": "opel",
+  "name": "Opel Mokka",
+  "price": 1146600,
+  "img": {
+   "x1": {
+    "file": "/models/0001_45-232.webp",
+    "w": 232,
+    "h": 90
+   },
+   "x2": {
+    "file": "/models/0001_45-464.webp",
+    "w": 464,
+    "h": 181
+   }
+  },
+  "natural": {
+   "w": 583,
+   "h": 227
+  }
+ },
+ {
+  "brand": "Opel",
+  "brandSlug": "opel",
+  "name": "Opel Grandland",
+  "price": 1330000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_80-232.webp",
+    "w": 232,
+    "h": 93
+   },
+   "x2": {
+    "file": "/models/0001_80-464.webp",
+    "w": 464,
+    "h": 185
+   }
+  },
+  "natural": {
+   "w": 561,
+   "h": 224
+  }
+ },
+ {
+  "brand": "Opel",
+  "brandSlug": "opel",
+  "name": "Opel Zafira",
+  "price": 1995300,
+  "img": {
+   "x1": {
+    "file": "/models/0001_38-232.webp",
+    "w": 232,
+    "h": 98
+   },
+   "x2": {
+    "file": "/models/0001_38-464.webp",
+    "w": 464,
+    "h": 196
+   }
+  },
+  "natural": {
+   "w": 597,
+   "h": 252
+  }
+ },
+ {
+  "brand": "Opel",
+  "brandSlug": "opel",
+  "name": "Opel Movano",
+  "price": 1627700,
+  "img": {
+   "x1": {
+    "file": "/models/0001_39-232.webp",
+    "w": 232,
+    "h": 99
+   },
+   "x2": {
+    "file": "/models/0001_39-464.webp",
+    "w": 464,
+    "h": 199
+   }
+  },
+  "natural": {
+   "w": 589,
+   "h": 252
+  }
+ },
+ {
+  "brand": "Opel",
+  "brandSlug": "opel",
+  "name": "Opel Combo",
+  "price": 1048900,
+  "img": {
+   "x1": {
+    "file": "/models/0001_75-232.webp",
+    "w": 232,
+    "h": 106
+   },
+   "x2": {
+    "file": "/models/0001_75-464.webp",
+    "w": 464,
+    "h": 211
+   }
+  },
+  "natural": {
+   "w": 551,
+   "h": 251
+  }
+ },
+ {
+  "brand": "Opel",
+  "brandSlug": "opel",
+  "name": "Opel Combo Cargo",
+  "price": 1022700,
+  "img": {
+   "x1": {
+    "file": "/models/0001_36-232.webp",
+    "w": 232,
+    "h": 106
+   },
+   "x2": {
+    "file": "/models/0001_36-464.webp",
+    "w": 464,
+    "h": 212
+   }
+  },
+  "natural": {
+   "w": 559,
+   "h": 255
+  }
+ },
+ {
+  "brand": "Opel",
+  "brandSlug": "opel",
+  "name": "Opel Vivaro",
+  "price": 1497700,
+  "img": {
+   "x1": {
+    "file": "/models/0001_40-232.webp",
+    "w": 232,
+    "h": 98
+   },
+   "x2": {
+    "file": "/models/0001_40-464.webp",
+    "w": 464,
+    "h": 196
+   }
+  },
+  "natural": {
+   "w": 597,
+   "h": 252
+  }
+ },
+ {
+  "brand": "Opel",
+  "brandSlug": "opel",
+  "name": "Opel Frontera",
+  "price": 1092000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_85-232.webp",
+    "w": 232,
+    "h": 102
+   },
+   "x2": {
+    "file": "/models/0001_85-464.webp",
+    "w": 464,
+    "h": 205
+   }
+  },
+  "natural": {
+   "w": 575,
+   "h": 254
+  }
+ },
+ {
+  "brand": "Peugeot",
+  "brandSlug": "peugeot",
+  "name": "Peugeot 2008",
+  "price": 1115000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_33-232.webp",
+    "w": 232,
+    "h": 101
+   },
+   "x2": {
+    "file": "/models/0001_33-406.webp",
+    "w": 406,
+    "h": 177
+   }
+  },
+  "natural": {
+   "w": 406,
+   "h": 177
+  }
+ },
+ {
+  "brand": "Peugeot",
+  "brandSlug": "peugeot",
+  "name": "Peugeot 3008",
+  "price": 1371200,
+  "img": {
+   "x1": {
+    "file": "/models/0001_78-232.webp",
+    "w": 232,
+    "h": 88
+   },
+   "x2": {
+    "file": "/models/0001_78-464.webp",
+    "w": 464,
+    "h": 175
+   }
+  },
+  "natural": {
+   "w": 598,
+   "h": 226
+  }
+ },
+ {
+  "brand": "Peugeot",
+  "brandSlug": "peugeot",
+  "name": "Peugeot e-3008",
+  "price": null,
+  "img": {
+   "x1": {
+    "file": "/models/0001_86-232.webp",
+    "w": 232,
+    "h": 88
+   },
+   "x2": {
+    "file": "/models/0001_86-464.webp",
+    "w": 464,
+    "h": 175
+   }
+  },
+  "natural": {
+   "w": 598,
+   "h": 226
+  }
+ },
+ {
+  "brand": "Peugeot",
+  "brandSlug": "peugeot",
+  "name": "Peugeot 408",
+  "price": 1324200,
+  "img": {
+   "x1": {
+    "file": "/models/0001_58-232.webp",
+    "w": 232,
+    "h": 77
+   },
+   "x2": {
+    "file": "/models/0001_58-464.webp",
+    "w": 464,
+    "h": 155
+   }
+  },
+  "natural": {
+   "w": 600,
+   "h": 200
+  }
+ },
+ {
+  "brand": "Peugeot",
+  "brandSlug": "peugeot",
+  "name": "Peugeot Rifter",
+  "price": 1047600,
+  "img": {
+   "x1": {
+    "file": "/models/0001_26-232.webp",
+    "w": 232,
+    "h": 94
+   },
+   "x2": {
+    "file": "/models/0001_26-464.webp",
+    "w": 464,
+    "h": 188
+   }
+  },
+  "natural": {
+   "w": 558,
+   "h": 226
+  }
+ },
+ {
+  "brand": "Peugeot",
+  "brandSlug": "peugeot",
+  "name": "Peugeot Partner",
+  "price": 1052700,
+  "img": {
+   "x1": {
+    "file": "/models/0001_20-232.webp",
+    "w": 232,
+    "h": 93
+   },
+   "x2": {
+    "file": "/models/0001_20-464.webp",
+    "w": 464,
+    "h": 186
+   }
+  },
+  "natural": {
+   "w": 1244,
+   "h": 499
+  }
+ },
+ {
+  "brand": "Peugeot",
+  "brandSlug": "peugeot",
+  "name": "Peugeot Boxer Fourgon",
+  "price": 1602300,
+  "img": {
+   "x1": {
+    "file": "/models/0001_18-232.webp",
+    "w": 232,
+    "h": 108
+   },
+   "x2": {
+    "file": "/models/0001_18-464.webp",
+    "w": 464,
+    "h": 217
+   }
+  },
+  "natural": {
+   "w": 550,
+   "h": 257
+  }
+ },
+ {
+  "brand": "Peugeot",
+  "brandSlug": "peugeot",
+  "name": "Peugeot Boxer Шасі",
+  "price": 1643400,
+  "img": {
+   "x1": {
+    "file": "/models/0001_21-232.webp",
+    "w": 232,
+    "h": 113
+   },
+   "x2": {
+    "file": "/models/0001_21-464.webp",
+    "w": 464,
+    "h": 227
+   }
+  },
+  "natural": {
+   "w": 530,
+   "h": 259
+  }
+ },
+ {
+  "brand": "Peugeot",
+  "brandSlug": "peugeot",
+  "name": "Peugeot Traveller",
+  "price": 2081400,
+  "img": {
+   "x1": {
+    "file": "/models/0001_17-232.webp",
+    "w": 232,
+    "h": 88
+   },
+   "x2": {
+    "file": "/models/0001_17-464.webp",
+    "w": 464,
+    "h": 177
+   }
+  },
+  "natural": {
+   "w": 606,
+   "h": 231
+  }
+ },
+ {
+  "brand": "Peugeot",
+  "brandSlug": "peugeot",
+  "name": "Peugeot Expert",
+  "price": 1517400,
+  "img": {
+   "x1": {
+    "file": "/models/0001_19-232.webp",
+    "w": 232,
+    "h": 96
+   },
+   "x2": {
+    "file": "/models/0001_19-464.webp",
+    "w": 464,
+    "h": 191
+   }
+  },
+  "natural": {
+   "w": 601,
+   "h": 248
+  }
+ },
+ {
+  "brand": "Peugeot",
+  "brandSlug": "peugeot",
+  "name": "Peugeot Landtrek",
+  "price": 1395100,
+  "img": {
+   "x1": {
+    "file": "/models/0001_59-232.webp",
+    "w": 232,
+    "h": 92
+   },
+   "x2": {
+    "file": "/models/0001_59-418.webp",
+    "w": 418,
+    "h": 165
+   }
+  },
+  "natural": {
+   "w": 418,
+   "h": 165
+  }
+ },
+ {
+  "brand": "Peugeot",
+  "brandSlug": "peugeot",
+  "name": "Peugeot 5008",
+  "price": 1721100,
+  "img": {
+   "x1": {
+    "file": "/models/0001_28-232.webp",
+    "w": 232,
+    "h": 86
+   },
+   "x2": {
+    "file": "/models/0001_28-464.webp",
+    "w": 464,
+    "h": 172
+   }
+  },
+  "natural": {
+   "w": 603,
+   "h": 223
+  }
+ },
+ {
+  "brand": "Peugeot",
+  "brandSlug": "peugeot",
+  "name": "Новий Peugeot 408",
+  "price": 1395900,
+  "img": {
+   "x1": {
+    "file": "/models/0001_98-232.webp",
+    "w": 232,
+    "h": 99
+   },
+   "x2": {
+    "file": "/models/0001_98-464.webp",
+    "w": 464,
+    "h": 199
+   }
+  },
+  "natural": {
+   "w": 588,
+   "h": 252
+  }
+ },
+ {
+  "brand": "Chery",
+  "brandSlug": "chery",
+  "name": "Chery Tiggo 2 Pro",
+  "price": 599000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_53-232.webp",
+    "w": 232,
+    "h": 97
+   },
+   "x2": {
+    "file": "/models/0001_53-464.webp",
+    "w": 464,
+    "h": 193
+   }
+  },
+  "natural": {
+   "w": 524,
+   "h": 218
+  }
+ },
+ {
+  "brand": "Chery",
+  "brandSlug": "chery",
+  "name": "Chery Tiggo 4",
+  "price": 724000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_09-232.webp",
+    "w": 232,
+    "h": 97
+   },
+   "x2": {
+    "file": "/models/0001_09-464.webp",
+    "w": 464,
+    "h": 194
+   }
+  },
+  "natural": {
+   "w": 584,
+   "h": 244
+  }
+ },
+ {
+  "brand": "Chery",
+  "brandSlug": "chery",
+  "name": "Chery Tiggo 4 Hybrid",
+  "price": 1039000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_88-232.webp",
+    "w": 232,
+    "h": 97
+   },
+   "x2": {
+    "file": "/models/0001_88-464.webp",
+    "w": 464,
+    "h": 194
+   }
+  },
+  "natural": {
+   "w": 584,
+   "h": 244
+  }
+ },
+ {
+  "brand": "Chery",
+  "brandSlug": "chery",
+  "name": "Chery FX EV",
+  "price": 1199000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_93-232.webp",
+    "w": 232,
+    "h": 87
+   },
+   "x2": {
+    "file": "/models/0001_93-464.webp",
+    "w": 464,
+    "h": 173
+   }
+  },
+  "natural": {
+   "w": 584,
+   "h": 218
+  }
+ },
+ {
+  "brand": "Chery",
+  "brandSlug": "chery",
+  "name": "Chery Tiggo 7 Pro",
+  "price": 879000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_54-232.webp",
+    "w": 232,
+    "h": 99
+   },
+   "x2": {
+    "file": "/models/0001_54-464.webp",
+    "w": 464,
+    "h": 197
+   }
+  },
+  "natural": {
+   "w": 532,
+   "h": 226
+  }
+ },
+ {
+  "brand": "Chery",
+  "brandSlug": "chery",
+  "name": "Chery Tiggo 7 Plug-in Hybrid",
+  "price": 1349000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_95-232.webp",
+    "w": 232,
+    "h": 91
+   },
+   "x2": {
+    "file": "/models/0001_95-464.webp",
+    "w": 464,
+    "h": 183
+   }
+  },
+  "natural": {
+   "w": 577,
+   "h": 227
+  }
+ },
+ {
+  "brand": "Chery",
+  "brandSlug": "chery",
+  "name": "Chery Tiggo 8 Plug-in Hybrid",
+  "price": 1569000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_94-232.webp",
+    "w": 232,
+    "h": 88
+   },
+   "x2": {
+    "file": "/models/0001_94-464.webp",
+    "w": 464,
+    "h": 175
+   }
+  },
+  "natural": {
+   "w": 588,
+   "h": 222
+  }
+ },
+ {
+  "brand": "Chery",
+  "brandSlug": "chery",
+  "name": "Chery Tiggo 9 Plug-in Hybrid",
+  "price": 1999000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_92-232.webp",
+    "w": 232,
+    "h": 86
+   },
+   "x2": {
+    "file": "/models/0001_92-464.webp",
+    "w": 464,
+    "h": 172
+   }
+  },
+  "natural": {
+   "w": 588,
+   "h": 218
+  }
+ },
+ {
+  "brand": "Chery",
+  "brandSlug": "chery",
+  "name": "Chery Himla",
+  "price": 1249000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_87-232.webp",
+    "w": 232,
+    "h": 82
+   },
+   "x2": {
+    "file": "/models/0001_87-464.webp",
+    "w": 464,
+    "h": 164
+   }
+  },
+  "natural": {
+   "w": 601,
+   "h": 213
+  }
+ },
+ {
+  "brand": "Jetour",
+  "brandSlug": "jetour",
+  "name": "Jetour X50",
+  "price": 680000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_81-232.webp",
+    "w": 232,
+    "h": 91
+   },
+   "x2": {
+    "file": "/models/0001_81-464.webp",
+    "w": 464,
+    "h": 182
+   }
+  },
+  "natural": {
+   "w": 570,
+   "h": 223
+  }
+ },
+ {
+  "brand": "Jetour",
+  "brandSlug": "jetour",
+  "name": "Jetour Dashing",
+  "price": 860000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_62-232.webp",
+    "w": 232,
+    "h": 89
+   },
+   "x2": {
+    "file": "/models/0001_62-464.webp",
+    "w": 464,
+    "h": 177
+   }
+  },
+  "natural": {
+   "w": 563,
+   "h": 215
+  }
+ },
+ {
+  "brand": "Jetour",
+  "brandSlug": "jetour",
+  "name": "Jetour X70 Plus",
+  "price": 1080000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_66-232.webp",
+    "w": 232,
+    "h": 89
+   },
+   "x2": {
+    "file": "/models/0001_66-464.webp",
+    "w": 464,
+    "h": 178
+   }
+  },
+  "natural": {
+   "w": 576,
+   "h": 221
+  }
+ },
+ {
+  "brand": "Jetour",
+  "brandSlug": "jetour",
+  "name": "Jetour X90 Plus",
+  "price": 1430000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_89-232.webp",
+    "w": 232,
+    "h": 92
+   },
+   "x2": {
+    "file": "/models/0001_89-464.webp",
+    "w": 464,
+    "h": 183
+   }
+  },
+  "natural": {
+   "w": 582,
+   "h": 230
+  }
+ },
+ {
+  "brand": "Jetour",
+  "brandSlug": "jetour",
+  "name": "Jetour T1",
+  "price": 1160000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_84-232.webp",
+    "w": 232,
+    "h": 93
+   },
+   "x2": {
+    "file": "/models/0001_84-464.webp",
+    "w": 464,
+    "h": 186
+   }
+  },
+  "natural": {
+   "w": 600,
+   "h": 240
+  }
+ },
+ {
+  "brand": "Jetour",
+  "brandSlug": "jetour",
+  "name": "Jetour T1 i-DM",
+  "price": 1650000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_90-232.webp",
+    "w": 232,
+    "h": 93
+   },
+   "x2": {
+    "file": "/models/0001_90-464.webp",
+    "w": 464,
+    "h": 187
+   }
+  },
+  "natural": {
+   "w": 596,
+   "h": 240
+  }
+ },
+ {
+  "brand": "Jetour",
+  "brandSlug": "jetour",
+  "name": "Jetour T2",
+  "price": 1500000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_76-232.webp",
+    "w": 232,
+    "h": 95
+   },
+   "x2": {
+    "file": "/models/0001_76-464.webp",
+    "w": 464,
+    "h": 190
+   }
+  },
+  "natural": {
+   "w": 557,
+   "h": 228
+  }
+ },
+ {
+  "brand": "KGM",
+  "brandSlug": "kgm",
+  "name": "KGM Musso Grand",
+  "price": 1515000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_72-232.webp",
+    "w": 232,
+    "h": 122
+   },
+   "x2": {
+    "file": "/models/0001_72-271.webp",
+    "w": 271,
+    "h": 142
+   }
+  },
+  "natural": {
+   "w": 271,
+   "h": 142
+  }
+ },
+ {
+  "brand": "KGM",
+  "brandSlug": "kgm",
+  "name": "KGM Torres",
+  "price": 1259900,
+  "img": {
+   "x1": {
+    "file": "/models/0001_73-232.webp",
+    "w": 232,
+    "h": 122
+   },
+   "x2": {
+    "file": "/models/0001_73-280.webp",
+    "w": 280,
+    "h": 147
+   }
+  },
+  "natural": {
+   "w": 280,
+   "h": 147
+  }
+ },
+ {
+  "brand": "KGM",
+  "brandSlug": "kgm",
+  "name": "KGM Rexton",
+  "price": 1550000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_91-232.webp",
+    "w": 232,
+    "h": 125
+   },
+   "x2": {
+    "file": "/models/0001_91-281.webp",
+    "w": 281,
+    "h": 152
+   }
+  },
+  "natural": {
+   "w": 281,
+   "h": 152
+  }
+ },
+ {
+  "brand": "KGM",
+  "brandSlug": "kgm",
+  "name": "Новий KGM Musso Grand",
+  "price": 1640000,
+  "img": {
+   "x1": {
+    "file": "/models/0001_97-232.webp",
+    "w": 232,
+    "h": 117
+   },
+   "x2": {
+    "file": "/models/0001_97-283.webp",
+    "w": 283,
+    "h": 143
+   }
+  },
+  "natural": {
+   "w": 283,
+   "h": 143
+  }
+ }
+]
