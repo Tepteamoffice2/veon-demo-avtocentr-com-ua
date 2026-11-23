@@ -1,4 +1,5 @@
 ---
+const base = String(import.meta.env.BASE_URL).endsWith("/") ? String(import.meta.env.BASE_URL).slice(0, -1) : String(import.meta.env.BASE_URL);
 // Light compact footer (concept §8.2 footer): logo → #top, address, main phone, e-mail, socials, future sections.
 // The legal entity is not shown (B-F011 is unconfirmed).
 import FutureLink from "./FutureLink.astro";
@@ -8,7 +9,7 @@ const future = ["Акції", "Новини", "Вакансії", "Політи�
 <footer class="footer">
   <div class="container footer__in">
     <a class="footer__logo" href="#top">
-      <img src="/logo_uk.svg" width="649" height="165" alt="Автоцентр Укравто на Столичному — на початок сторінки" />
+      <img src={`${base}/logo_uk.svg`} width="649" height="165" alt="Автоцентр Укравто на Столичному — на початок сторінки" />
     </a>
     <address class="footer__addr">
       <span>{address.full}</span>
